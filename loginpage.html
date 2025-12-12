@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Creative Login / Signup</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        font-family: Poppins, sans-serif;
+        overflow: hidden;
+    }
+
+    .container {
+        width: 380px;
+        background: rgba(255, 255, 255, 0.12);
+        padding: 30px;
+        border-radius: 18px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+        animation: fadeIn 1s ease forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        text-align: center;
+        color: #fff;
+        margin-bottom: 15px;
+    }
+
+    .input-group {
+        margin-top: 12px;
+    }
+
+    label {
+        color: #e8e8e8;
+        font-size: 14px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 5px;
+        border: 2px solid transparent;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border-color: #7dd3fc;
+        box-shadow: 0 0 8px #7dd3fc;
+        background: rgba(255,255,255,0.22);
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: linear-gradient(90deg, #00c6ff, #0072ff);
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    .error {
+        color: skyblue;
+        margin-top: 8px;
+        padding: 8px;
+        border-radius: 6px;
+        background: rgba(110, 112, 113, 0.15);
+        font-size: 14px;
+        display: none;
+        animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create Account</h2>
+
+    <form id="form">
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter Username">
+        </div>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter Email">
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter Password">
+        </div>
+
+        <div class="input-group">
+            <label>Confirm Password</label>
+            <input type="password" id="confirm" placeholder="Confirm Password">
+        </div>
+
+        <div id="errorBox" class="error"></div>
+
+        <button type="button" class="btn" id="verifyBtn">Verify</button>
+        <button type="submit" class="btn">Sign Up</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById("form");
+    const errorBox = document.getElementById("errorBox");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const confirm = document.getElementById("confirm").value.trim();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (username === "") return showError("Username cannot be empty");
+        if (!emailRegex.test(email)) return showError("Invalid Email ID");
+        if (password.length < 6) return showError("Password must be at least 6 characters");
+        if (password !== confirm) return showError("Passwords do not match");
+
+        showError("Signup Successful!", true);
+    });
+
+    function showError(msg, success = false) {
+        errorBox.style.display = "block";
+        errorBox.style.color = success ? "lightgreen" : "skyblue";
+        errorBox.textContent = msg;
+        errorBox.style.animation = "shake 0.4s ease";
+    }
+</script>
+
+</body>
+</
