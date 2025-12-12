@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Validation form</title>
-    </head>
-    <body>
-        
-        <form
-    </body>
+<html>
+<head>
+    <title>Simple Registration Form</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background:linear-gradient(to right, rgb(77, 77, 162),rgb(188, 25, 188));
+        }
+
+        .container {
+            width: 350px;
+           margin:auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        button {
+            background: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e96404;
+        }
+    </style>
+</head>
+
+<body>
+<center>
+    <div class="container">
+        <h2>Registration Form</h2>
+
+        <form id="regForm">
+
+            <input type="text" id="name" placeholder="Full Name" required>
+
+            <input type="email" id="email" placeholder="Email" required>
+
+            <input type="password" id="password" placeholder="Password" required>
+
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+
+            <button type="button" onclick="submitForm()">Register</button>
+        </form>
+    </div>
+    </center>
+
+    <script>
+        function submitForm() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let pass = document.getElementById("password").value;
+            let phone = document.getElementById("phone").value;
+
+            if (name === "" || email === "" || pass === "" || phone === "") {
+                alert("Please fill all fields");
+            } else {
+                alert("Registration Successful!\nWelcome, " + name);
+            }
+        }
+    </script>
+
+</body>
 </html>
